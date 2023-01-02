@@ -14,3 +14,8 @@ services:
       - KUMULUZEE_CONFIG_CONSUL_AGENT=${CONSUL_URL}
     ports:
       - ${LOCAL_PORT}:${LOCAL_PORT}
+
+networks:
+  default:
+    name: rso
+    external: true

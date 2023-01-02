@@ -6,6 +6,6 @@ RUN mvn --show-version --update-snapshots --batch-mode clean package
 FROM eclipse-temurin:18-jre
 RUN mkdir /app
 WORKDIR /app
-COPY --from=build ./app/api/target/items-microservice-api-1.0.0-SNAPSHOT.jar /app
+COPY --from=build ./app/api/target/ratings-microservice-api-1.0.0-SNAPSHOT.jar /app
 EXPOSE 8080
-CMD ["java", "-jar", "items-microservice-api-1.0.0-SNAPSHOT.jar"]
+CMD ["java", "-jar", "ratings-microservice-api-1.0.0-SNAPSHOT.jar"]

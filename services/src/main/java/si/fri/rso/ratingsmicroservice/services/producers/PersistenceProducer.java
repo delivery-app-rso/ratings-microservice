@@ -1,4 +1,4 @@
-package si.fri.rso.itemsmicroservice.services.producers;
+package si.fri.rso.ratingsmicroservice.services.producers;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Disposes;
@@ -9,7 +9,7 @@ import javax.persistence.PersistenceUnit;
 
 public class PersistenceProducer {
 
-    @PersistenceUnit(unitName = "items-microservice-jpa")
+    @PersistenceUnit(unitName = "ratings-microservice-jpa")
     private EntityManagerFactory emf;
 
     @Produces

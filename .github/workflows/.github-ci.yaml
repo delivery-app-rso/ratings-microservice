@@ -21,4 +21,4 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: rsouser/items-microservice:latest
+          tags: rsouser/ratings-microservice:latest

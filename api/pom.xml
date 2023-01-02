@@ -3,12 +3,12 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>items-microservice</artifactId>
+        <artifactId>ratings-microservice</artifactId>
         <groupId>si.fri.rso</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>items-microservice-api</artifactId>
+    <artifactId>ratings-microservice-api</artifactId>
     <dependencies>
         <dependency>
             <groupId>com.kumuluz.ee</groupId>
@@ -39,12 +39,17 @@
             <artifactId>kumuluzee-health</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.kumuluz.ee.discovery</groupId>
-            <artifactId>kumuluzee-discovery-consul</artifactId>
+            <groupId>com.kumuluz.ee.graphql</groupId>
+            <artifactId>kumuluzee-graphql</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.kumuluz.ee.graphql</groupId>
+            <artifactId>kumuluzee-graphql-ui</artifactId>
         </dependency>
         <dependency>
             <groupId>si.fri.rso</groupId>
-            <artifactId>items-microservice-services</artifactId>
+            <artifactId>ratings-microservice-services</artifactId>
         </dependency>
     </dependencies>
     <build>
