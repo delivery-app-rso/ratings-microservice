@@ -43,3 +43,9 @@ kumuluzee:
       - ratings-microservice-services
       - ratings-microservice-models
       - ratings-microservice-lib
+  kumuluzee:
+    cors-filter:
+      annotations:
+        my-resource:
+          allow-origin: "*"
+          allow-subdomains: true
