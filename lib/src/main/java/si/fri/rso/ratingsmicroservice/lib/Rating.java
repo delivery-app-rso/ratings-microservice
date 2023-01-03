@@ -7,6 +7,15 @@ public class Rating {
     private Integer id;
     private Integer userId;
     private Integer rating;
+    private Integer deliveryId;
+
+    public Integer getDeliveryId() {
+        return deliveryId;
+    }
+
+    public void setDeliveryId(Integer deliveryId) {
+        this.deliveryId = deliveryId;
+    }
 
     public Integer getId() {
         return id;

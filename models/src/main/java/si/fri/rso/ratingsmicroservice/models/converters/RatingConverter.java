@@ -11,6 +11,7 @@ public class RatingConverter {
         dto.setId(entity.getId());
         dto.setUserId(entity.getUserId());
         dto.setRating(entity.getRating());
+        dto.setDeliveryId(entity.getDeliveryId());
 
         return dto;
 
@@ -22,6 +23,7 @@ public class RatingConverter {
         entity.setId(dto.getId());
         entity.setUserId(dto.getUserId());
         entity.setRating(dto.getRating());
+        entity.setDeliveryId(dto.getDeliveryId());
 
         return entity;
 

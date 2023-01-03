@@ -17,8 +17,19 @@ public class RatingEntity {
     @Column(name = "userId")
     private Integer userId;
 
+    @Column(name = "deliveryId")
+    private Integer deliveryId;
+
     @Column(name = "rating")
     private Integer rating;
+
+    public Integer getDeliveryId() {
+        return deliveryId;
+    }
+
+    public void setDeliveryId(Integer deliveryId) {
+        this.deliveryId = deliveryId;
+    }
 
     public Integer getId() {
         return id;

@@ -88,11 +88,15 @@ public class RatingResource {
         public Response createRating(
                         @RequestBody(description = "DTO object with rating data.", required = true, content = @Content(schema = @Schema(implementation = Rating.class))) Rating rating) {
 
-                if (rating.getUserId() == null || rating.getRating() == null) {
+                if (rating.getUserId() == null || rating.getRating() == null || rating.getDeliveryId() == null) {
                         return Response.status(Response.Status.BAD_REQUEST).build();
-                } else {
-                        rating = ratingBean.createRating(rating);
                 }
+
+                if (ratingBean.userRatedBefore(rating.getDeliveryId()) != null) {
+                        return Response.status(Response.Status.CONFLICT).build();
+                }
+
+                rating = ratingBean.createRating(rating);
 
                 return Response.status(Response.Status.CREATED).entity(rating).build();
 

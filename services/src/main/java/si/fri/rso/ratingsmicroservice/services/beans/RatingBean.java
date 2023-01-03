@@ -81,6 +81,19 @@ public class RatingBean {
                 .map(RatingConverter::toDto).collect(Collectors.toList());
     }
 
+    public Rating userRatedBefore(Integer deliveryId) {
+        List<RatingEntity> resultsList = (List<RatingEntity>) em
+                .createQuery("SELECT r FROM RatingEntity r WHERE r.deliveryId=:deliveryId")
+                .setParameter("deliveryId", deliveryId)
+                .getResultList();
+
+        if (resultsList.size() == 0) {
+            return null;
+        }
+
+        return resultsList.stream().map(RatingConverter::toDto).collect(Collectors.toList()).get(0);
+    }
+
     public List<Rating> getUserRatings(Integer userId) {
         List<RatingEntity> resultsList = (List<RatingEntity>) em
                 .createQuery("SELECT r FROM RatingEntity r WHERE r.userId=:userId")
