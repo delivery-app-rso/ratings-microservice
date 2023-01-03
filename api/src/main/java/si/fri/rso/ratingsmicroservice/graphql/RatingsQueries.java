@@ -35,4 +35,9 @@ public class RatingsQueries {
     public List<Rating> getUserRatings(@GraphQLArgument(name = "userId") Integer userId) {
         return ratingBean.getUserRatings(userId);
     }
+
+    @GraphQLQuery
+    public List<Rating> fallbackTest() {
+        return ratingBean.fallbackTest();
+    }
 }

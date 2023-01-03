@@ -13,6 +13,9 @@ kumuluzee:
       password: postgres
       pool:
         max-size: 20
+  openapi-mp:
+    ui:
+      mapping: /openapi/ui
   health:
     checks:
       data-source-health-check:
@@ -27,11 +30,6 @@ kumuluzee:
     web-instrumentation:
       - name: ratings-endpoint
         url-pattern: /v1/images/*
-  config:
-    start-retry-delay-ms: 500
-    max-retry-delay-ms: 900000
-    consul:
-      agent: http://localhost:8500
   graphql:
     schema:
       include-scalars: true

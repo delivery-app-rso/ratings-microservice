@@ -42,10 +42,14 @@ spec:
               value: ${DB_USER}
             - name: KUMULUZEE_DATASOURCES0_PASSWORD
               value: ${DB_PASS}
-            - name: KUMULUZEE_CONFIG_CONSUL_AGENT
-              value: http://10.244.1.21:8500
+            - name: KUMULUZEE_SERVER_HTTP_PORT
+              value: "8004"
+            - name: KUMULUZEE_ENV_NAME
+              value: "dev"
+            - name: KUMULUZEE_NAME
+              value: "ratings-microservice"
           ports:
-            - containerPort: 8080
+            - containerPort: 8004
               name: server
               protocol: TCP
 

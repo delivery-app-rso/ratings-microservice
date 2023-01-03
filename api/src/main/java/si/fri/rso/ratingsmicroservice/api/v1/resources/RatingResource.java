@@ -59,7 +59,8 @@ public class RatingResource {
 
         @Operation(description = "Get ratings for user.", summary = "Get rating")
         @APIResponses({
-                        @APIResponse(responseCode = "200", description = "Ratings data for user", content = @Content(schema = @Schema(implementation = Rating.class))) })
+                        @APIResponse(responseCode = "200", description = "Ratings data for user", content = @Content(schema = @Schema(implementation = Rating.class))),
+                        @APIResponse(responseCode = "404", description = "Rating not found.") })
         @GET
         @Path("/{userId}")
         public Response getUserRatings(
@@ -77,7 +78,7 @@ public class RatingResource {
         @Operation(description = "Add rating.", summary = "Add rating")
         @APIResponses({
                         @APIResponse(responseCode = "201", description = "Raiting successfully added."),
-                        @APIResponse(responseCode = "405", description = "Validation error .")
+                        @APIResponse(responseCode = "400", description = "Bad request error.")
         })
         @POST
         public Response createRating(
@@ -89,13 +90,14 @@ public class RatingResource {
                         rating = ratingBean.createRating(rating);
                 }
 
-                return Response.status(Response.Status.CONFLICT).entity(rating).build();
+                return Response.status(Response.Status.CREATED).entity(rating).build();
 
         }
 
         @Operation(description = "Update rating.", summary = "Update rating")
         @APIResponses({
-                        @APIResponse(responseCode = "200", description = "rating successfully updated.")
+                        @APIResponse(responseCode = "200", description = "rating successfully updated."),
+                        @APIResponse(responseCode = "404", description = "Rating not found.")
         })
         @PUT
         @Path("{ratingId}")
@@ -109,7 +111,7 @@ public class RatingResource {
                         return Response.status(Response.Status.NOT_FOUND).build();
                 }
 
-                return Response.status(Response.Status.NOT_MODIFIED).build();
+                return Response.status(Response.Status.OK).build();
 
         }
 

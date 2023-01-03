@@ -8,12 +8,17 @@ import javax.persistence.TypedQuery;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.UriInfo;
 
+import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
+import org.eclipse.microprofile.faulttolerance.Fallback;
+import org.eclipse.microprofile.faulttolerance.Timeout;
 import org.eclipse.microprofile.metrics.annotation.Timed;
 
 import si.fri.rso.ratingsmicroservice.lib.Rating;
 import si.fri.rso.ratingsmicroservice.models.converters.RatingConverter;
 import si.fri.rso.ratingsmicroservice.models.entities.RatingEntity;
 
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -29,6 +34,9 @@ public class RatingBean {
     @Inject
     private EntityManager em;
 
+    @Timeout(value = 2, unit = ChronoUnit.SECONDS)
+    @CircuitBreaker(requestVolumeThreshold = 3)
+    @Fallback(fallbackMethod = "getRatingFallback")
     public List<Rating> getRating() {
 
         TypedQuery<RatingEntity> query = em.createNamedQuery(
@@ -39,7 +47,31 @@ public class RatingBean {
         return resultList.stream().map(RatingConverter::toDto).collect(Collectors.toList());
     }
 
+    @Timeout(value = 2, unit = ChronoUnit.SECONDS)
+    @CircuitBreaker(requestVolumeThreshold = 3)
+    @Fallback(fallbackMethod = "getRatingFallback")
+    public List<Rating> fallbackTest() {
+        try {
+            wait(4000);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
+    }
+
+    public List<Rating> getRatingFallback() {
+        return new ArrayList<Rating>();
+    }
+
+    public List<Rating> getRatingFallback(UriInfo uriInfo) {
+        return new ArrayList<Rating>();
+    }
+
     @Timed
+    @Timeout(value = 2, unit = ChronoUnit.SECONDS)
+    @CircuitBreaker(requestVolumeThreshold = 3)
+    @Fallback(fallbackMethod = "getRatingFallback")
     public List<Rating> getRatingFilter(UriInfo uriInfo) {
 
         QueryParameters queryParameters = QueryParameters.query(uriInfo.getRequestUri().getQuery()).defaultOffset(0)
